@@ -1,10 +1,20 @@
 #!/bin/bash
 
-file_to_delete=$(pwd)/$1
+for arg in "${@:1}"; do
+    if [ -z "$files_to_delete" ]; then
+        files_to_delete="\"$(pwd)/$arg\""
+    else
+        files_to_delete="$files_to_delete, \"$(pwd)/$arg\""
+    fi
+done
 
 osascript <<EOD
-    set file_to_delete to POSIX file "$file_to_delete"
+    set POSIX_files_to_delete to { $files_to_delete }
+    set files_to_delete to {}
     tell app "Finder"
-        delete file_to_delete
+        repeat with POSIX_path in POSIX_files_to_delete
+            set end of files_to_delete to (POSIX_path as POSIX file)
+        end repeat
+        delete files_to_delete
     end tell
 EOD
