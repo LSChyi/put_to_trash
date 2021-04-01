@@ -5,3 +5,5 @@ This `put_to_trash` is a simple script which uses the `Finder` application to pu
 
 ## Installation
 Put the script `put_to_trash` to `/usr/local/bin` with adding the executable permission, and replace the command `rm` with setting alias `alias rm=put_to_trash` in the `.rc` files, such as `.bashrc` or `.zshrc`.
+
+If you want to run the real `rm`, you can still delete things with running `$ \rm files`.
