@@ -1,0 +1,10 @@
+#!/bin/bash
+
+file_to_delete=$(pwd)/$1
+
+osascript <<EOD
+    set file_to_delete to POSIX file "$file_to_delete"
+    tell app "Finder"
+        delete file_to_delete
+    end tell
+EOD
